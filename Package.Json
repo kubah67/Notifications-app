@@ -1,0 +1,30 @@
+here{
+  "name": "events-app-monolith",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "ts-node src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "db:generate": "prisma generate",
+    "db:push": "prisma db push"
+  },
+  "dependencies": {
+    "elysia": "^0.8.17",
+    "@elysiajs/swagger": "^0.8.1",
+    "@elysiajs/cors": "^0.8.1",
+    "@prisma/client": "^5.7.1",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "nodemailer": "^6.9.8"
+  },
+  "devDependencies": {
+    "prisma": "^5.7.1",
+    "typescript": "^5.3.3",
+    "ts-node": "^10.9.2",
+    "@types/node": "^20.10.5",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/nodemailer": "^6.4.14"
+  }
+}
