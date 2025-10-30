@@ -1,0 +1,24 @@
+hereevents-app-monolith/
+├── package.json
+├── tsconfig.json
+├── .env.example
+├── render.yaml
+├── src/
+│   ├── index.ts
+│   ├── prisma/
+│   │   └── schema.prisma
+│   ├── controllers/
+│   │   ├── auth.controller.ts
+│   │   ├── event.controller.ts
+│   │   └── rsvp.controller.ts
+│   ├── middleware/
+│   │   └── auth.middleware.ts
+│   ├── routes/
+│   │   ├── auth.routes.ts
+│   │   └── event.routes.ts
+│   ├── services/
+│   │   ├── email.service.ts
+│   │   └── websocket.service.ts
+│   └── utils/
+│       ├── jwt.utils.ts
+│       └── errorHandler.ts
