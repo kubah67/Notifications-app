@@ -1,0 +1,26 @@
+hereservices:
+  - type: web
+    name: event-monolith-app
+    env: node
+    plan: free
+    buildCommand: npm install && npx prisma generate && npm run build
+    startCommand: npm start
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: event-monolith-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      - key: ETHEREAL_USER
+        value: test@ethereal.email
+      - key: ETHEREAL_PASS
+        value: test123
+
+databases:
+  - name: event-monolith-db
+    plan: free
+    databaseName: eventmonolith
+    user: eventuser
