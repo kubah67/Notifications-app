@@ -1,0 +1,33 @@
+export class AppError extends Error {
+  constructor(
+    public message: string,
+    public statusCode: number = 500,
+    public isOperational: boolean = true
+  ) {
+    super(message);
+    Object.setPrototypeOf(this, AppError.prototype);
+  }
+}
+
+export const errorHandler = (error: any) => {
+  if (error instanceof AppError) {
+    return new Response(
+      JSON.stringify({
+        success: false,
+        message: error.message,
+        statusCode: error.statusCode
+      }),
+      { status: error.statusCode, headers: { 'Content-Type': 'application/json' } }
+    );
+  }
+
+  console.error('Unexpected error:', error);
+  return new Response(
+    JSON.stringify({
+      success: false,
+      message: 'Internal server error',
+      statusCode: 500
+    }),
+    { status: 500, headers: { 'Content-Type': 'application/json' } }
+  );
+};￼Enter
