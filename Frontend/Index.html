@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Event App</title>
+    <style>
+        body { font-family: Arial; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .container { margin: 20px 0; }
+        input, button, textarea { margin: 5px; padding: 8px; }
+        .event { border: 1px solid #ccc; padding: 10px; margin: 10px 0; }
+        .hidden { display: none; }
+    </style>
+</head>
+<body>
+    <h1>🎉 Event Management App</h1>
+
+    <!-- Login/Signup -->
+    <div id="auth-container">
+        <h3>Login / Signup</h3>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="signup()">Sign Up</button>
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- Main App -->
+    <div id="app-container" class="hidden">
+        <h3>Welcome, <span id="user-email"></span> (<span id="user-role"></span>)</h3>
+        
+        <!-- Create Event -->
+        <div class="container">
+            <h4>Create Event</h4>
+            <input type="text" id="event-title" placeholder="Title">
+            <textarea id="event-desc" placeholder="Description"></textarea>
+            <input type="datetime-local" id="event-date">
+            <input type="text" id="event-location" placeholder="Location">
+            <button onclick="createEvent()">Create Event</button>
+        </div>
+
+        <!-- Events List -->
+        <div class="container">
+            <h4>Events</h4>
+            <div id="events-list"></div>
+        </div>
+
+        <!-- WebSocket Status -->
+        <div class="container">
+            <p>WebSocket: <span id="ws-status">Disconnected</span></p>
+            <div id="ws-messages"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>￼Enter
