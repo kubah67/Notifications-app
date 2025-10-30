@@ -1,0 +1,44 @@
+import { Elysia, t } from 'elysia';
+import { swagger } from '@elysiajs/swagger';
+import { cors } from '@elysiajs/cors';
+import { PrismaClient } from '@prisma/client';
+import authRoutes from './routes/auth.routes';
+import eventRoutes from './routes/event.routes';
+import { WebSocketService } from './services/websocket.service';
+
+const prisma = new PrismaClient();
+const wsService = new WebSocketService();
+
+const app = new Elysia()
+  .use(swagger({
+    documentation: {
+      info: {
+        title: 'Event Management API',
+        version: '1.0.0',
+        description: 'A monolith event management application with authentication and realtime features'
+      },
+      tags: [
+        { name: 'Auth', description: 'Authentication endpoints' },
+        { name: 'Events', description: 'Event management endpoints' }
+      ]
+    }
+  }))
+  .use(cors())
+  .state('prisma', prisma)
+  .state('wsService', wsService)
+  .use(authRoutes)
+  .use(eventRoutes)
+  .ws('/ws', {
+    open(ws) {
+      wsService.addConnection(ws);
+      console.log('WebSocket connection opened');
+    },
+    close(ws) {
+      wsService.removeConnection(ws);
+      console.log('WebSocket connection closed');
+    }
+  })
+  .get('/', () => 'Event Management API is running!')
+  .listen(process.env.PORT || 3000);
+
+console.log(`🦊 Elysia is running at ${app.server?.hostname}:${app.server?.port}`);￼Enter
